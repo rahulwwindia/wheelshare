@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wheelshare.app.model.User;
-import com.wheelshare.app.model.UserAuth;
 import com.wheelshare.app.model.Status;
+import com.wheelshare.app.model.User;
 import com.wheelshare.app.services.UserService;
   
 @Controller

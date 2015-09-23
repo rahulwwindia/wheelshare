@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
@@ -85,6 +86,7 @@ public class User{
 	private UserAuth userAuth;   
 	
 	@Column(name = "PASSWORD") 
+	@JsonIgnore
 	private String password;
 
 	public Date getUpdatedDate() {
