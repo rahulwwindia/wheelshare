@@ -2,6 +2,8 @@ package com.wheelshare.app.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.FormParam;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -52,16 +54,13 @@ public class UserController {
 			e.printStackTrace();
 		}
 		return user;
-	}
+	}  
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
+	@RequestMapping(value = "/login", method = RequestMethod.POST) 
 	public @ResponseBody
-	Status userLogin(@RequestBody User user) {
+	Status userLogin(@FormParam("firstName") String firstName) {
 		try { 
-			Date date =new Date();
-			user.setCreatedDate(date);  
-			user.setUpdatedDate(date );
-			UserService.addUser(user);  
+			System.out.println("first Name :"+firstName);
 			return new Status(1, "User added Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
