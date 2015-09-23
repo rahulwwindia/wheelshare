@@ -43,13 +43,14 @@ public class Rider{
 	private long toLocation;
 	@Column(name = "TRAVEL_TIME")
 	private String travel_time;
+	@Temporal(TemporalType.DATE)
 	@Column(name = "TRAVEL_DATE")
 	private Date travel_date;
 	@Column(name = "CAPACITY")
 	private int capacity;
 	@Column(name = "SHARE_WITH")
 	private String shareWith;
-	
+	  
 	@Type(type="yes_no")  
 	@Column(name = "RIDER_ACTIVE")          
 	private boolean active;	         

@@ -1,6 +1,5 @@
 package com.wheelshare.app.model;
 
-
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
@@ -18,7 +17,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
@@ -83,10 +81,9 @@ public class User{
  
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
-	private UserAuth userAuth;   
+	private UserAuth userAuth;    
 	
 	@Column(name = "PASSWORD") 
-	@JsonIgnore
 	private String password;
 
 	public Date getUpdatedDate() {

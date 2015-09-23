@@ -32,8 +32,7 @@ public class UserController {
 			Date date =new Date();
 			user.setCreatedDate(date);  
 			user.setUpdatedDate(date );
-			System.out.println(user.getPassword());
-			UserService.addUser(user); 
+			UserService.addUser(user);  
 			return new Status(1, "User added Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -54,6 +53,23 @@ public class UserController {
 		}
 		return user;
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
+	public @ResponseBody
+	Status userLogin(@RequestBody User user) {
+		try { 
+			Date date =new Date();
+			user.setCreatedDate(date);  
+			user.setUpdatedDate(date );
+			UserService.addUser(user);  
+			return new Status(1, "User added Successfully !");
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return new Status(0, e.toString());
+		}
+
+	}
+
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody

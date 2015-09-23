@@ -15,16 +15,15 @@ import com.wheelshare.app.model.Rider;
 import com.wheelshare.app.model.Status;
 import com.wheelshare.app.services.RiderService;
 @Controller
-@RequestMapping("/rider")  
+@RequestMapping("/rider")
 public class RiderController {
 	
-	@Autowired  
+	@Autowired
 	RiderService riderService;
-	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
 	public @ResponseBody
 	Status addRider(@RequestBody Rider rider) {
-		try {  
+		try { 
 			System.out.println("Test");  
 			Date date =new Date();
 			rider.setCreatedDate(date);
