@@ -9,6 +9,7 @@ import com.wheelshare.app.model.UserAuth;
 public interface UserService {
 
 	public boolean addUser(User User);
+	public User getUserByUserNamePass(String userName,String password);
 	public User getUserById(long id);
 	public List<User> getUserList();
 	public boolean deleteUser(long UserId);

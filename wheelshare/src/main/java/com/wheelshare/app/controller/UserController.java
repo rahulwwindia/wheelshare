@@ -23,7 +23,7 @@ import com.wheelshare.app.services.UserService;
 public class UserController {
 
 	@Autowired
-	UserService UserService;
+	UserService userService;
 
 	static final Logger logger = Logger.getLogger(UserController.class);
 
@@ -34,7 +34,7 @@ public class UserController {
 			Date date =new Date();
 			user.setCreatedDate(date);  
 			user.setUpdatedDate(date );
-			UserService.addUser(user);  
+			userService.addUser(user);  
 			return new Status(1, "User added Successfully !");
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -48,7 +48,7 @@ public class UserController {
 	User getUser(@PathVariable("id") long id) {
 		User user = null;
 		try {
-			user = UserService.getUserById(id);
+			user = userService.getUserById(id);
   
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,15 +58,15 @@ public class UserController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST) 
 	public @ResponseBody
-	Status userLogin(@FormParam("firstName") String firstName) {
+	User userLogin(@FormParam("userName") String userName,@FormParam("password") String password) {
+		User user = null;
+		System.out.println("Test");
 		try { 
-			System.out.println("first Name :"+firstName);
-			return new Status(1, "User added Successfully !");
+			user = userService.getUserByUserNamePass(userName,password);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			return new Status(0, e.toString());
 		}
-
+		return user;
 	}
 
 
@@ -76,7 +76,7 @@ public class UserController {
 
 		List<User> UserList = null;
 		try {
-			UserList = UserService.getUserList();
+			UserList = userService.getUserList();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +90,7 @@ public class UserController {
 	Status deleteUser(@PathVariable("id") long id) {
 
 		try {
-			UserService.deleteUser(id);
+			userService.deleteUser(id);
 			return new Status(1, "User deleted Successfully !");
 		} catch (Exception e) {
 			return new Status(0, e.toString());

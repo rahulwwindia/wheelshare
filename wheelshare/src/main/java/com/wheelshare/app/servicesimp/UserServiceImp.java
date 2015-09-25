@@ -49,6 +49,11 @@ public class UserServiceImp implements UserService{
 		// TODO Auto-generated method stub
 		return UserDao.addUserAuth(userAuth);
 	}
+  
+	@Override
+	public User getUserByUserNamePass(String userName, String password) {
+		return UserDao.getUserByUserNamePass(userName, password);
+	}
 
 	
 }

@@ -1,6 +1,5 @@
 package com.wheelshare.app.dao;
 
-
 import java.util.List;
 
 import com.wheelshare.app.model.User;
@@ -9,8 +8,10 @@ import com.wheelshare.app.model.UserAuth;
 public interface UserDao {
 
 	public boolean addUser(User User);
-	
+
 	public boolean addUserAuth(UserAuth User);
+
+	public User getUserByUserNamePass(String userName, String password);
 
 	public User getUserById(long id);
 

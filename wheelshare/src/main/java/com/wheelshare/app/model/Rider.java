@@ -2,9 +2,12 @@ package com.wheelshare.app.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -64,8 +67,20 @@ public class Rider{
 	@Column(name = "UPDATED_DATE", nullable = false)
 	private Date updatedDate;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private User user;    
+
 	public long getUserId() {
 		return userId;
+	}  
+
+	public User getUser() {
+		return user;
+	} 
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setUserId(long userId) {

@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
@@ -25,13 +26,13 @@ import com.wheelshare.app.utility.PasswordHash;
 
 @Entity
 @Table(name = "USER_MASTER")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Proxy(lazy = false) 
-public class User{
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@Proxy(lazy = false)
+public class User {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id  
+	@Id
 	@GeneratedValue
 	@Column(name = "USER_ID")
 	private long userId;
@@ -50,7 +51,7 @@ public class User{
 
 	@Column(name = "PHONE")
 	private String phone;
-	
+
 	@Column(name = "GENDER")
 	private String gender;
 	@Column(name = "IDENTITY_TYPE")
@@ -58,18 +59,18 @@ public class User{
 
 	@Column(name = "IDENTITY_NO")
 	private String identityNo;
-   
+
 	@Temporal(TemporalType.DATE)
-	@Column(name = "CREATED_DATE",nullable=false)
+	@Column(name = "CREATED_DATE", nullable = false)
 	private Date createdDate;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name = "UPDATED_DATE",nullable=false)
+	@Column(name = "UPDATED_DATE", nullable = false)
 	private Date updatedDate;
-	      
-	@Type(type="yes_no")  
-	@Column(name = "USER_ACTIVE")          
-	private boolean active;	         
+
+	@Type(type = "yes_no")
+	@Column(name = "USER_ACTIVE")
+	private boolean active;
 
 	public UserAuth getUserAuth() {
 		return userAuth;
@@ -77,13 +78,15 @@ public class User{
 
 	public void setUserAuth(UserAuth userAuth) {
 		this.userAuth = userAuth;
-	} 
- 
+	}
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
-	private UserAuth userAuth;    
-	
-	@Column(name = "PASSWORD") 
+	@JsonIgnore
+	private UserAuth userAuth;
+
+	@Column(name = "PASSWORD")
+	@JsonIgnore
 	private String password;
 
 	public Date getUpdatedDate() {
@@ -101,11 +104,11 @@ public class User{
 
 	public void setPassword(String password) {
 		try {
-			this.password=PasswordHash.createHash(password);
+			this.password = PasswordHash.createHash(password);
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
+		}
 	}
 
 	public String getRePassword() {
@@ -113,27 +116,28 @@ public class User{
 	}
 
 	public void setRePassword(String rePassword) {
-		this.rePassword = rePassword;  
-	}  
-  @Transient
+		this.rePassword = rePassword;
+	}
+
+	@Transient
+	@JsonIgnore
 	private String rePassword;
 
-	
 	public Date getCreatedDate() {
 		return createdDate;
 	}
 
 	public void setCreatedDate(Date createdDate) {
- 		this.createdDate = createdDate;
+		this.createdDate = createdDate;
 	}
 
 	public boolean isActive() {
 		return active;
-	}  
+	}
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}	
+	}
 
 	public String getGender() {
 		return gender;
@@ -207,6 +211,13 @@ public class User{
 		this.userName = userName;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", lastName=" + lastName + ", emailId=" + emailId + ", userName=" + userName
+				+ ", firstName=" + firstName + ", phone=" + phone + ", gender=" + gender + ", identityType="
+				+ identityType + ", identityNo=" + identityNo + ", createdDate=" + createdDate + ", updatedDate="
+				+ updatedDate + ", active=" + active + ", userAuth=" + userAuth + ", password=" + password
+				+ ", rePassword=" + rePassword + "]";
+	}
 
-	
 }
