@@ -1,5 +1,6 @@
 package com.wheelshare.app.model;
 
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
@@ -28,7 +29,7 @@ import com.wheelshare.app.utility.PasswordHash;
 @Table(name = "USER_MASTER")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Proxy(lazy = false)
-public class User {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -86,12 +87,11 @@ public class User {
 	private UserAuth userAuth;
 
 	@Column(name = "PASSWORD")
-	@JsonIgnore
 	private String password;
 
 	public Date getUpdatedDate() {
 		return updatedDate;
-	}
+	} 
 
 	@PreUpdate
 	public void setUpdatedDate(Date updatedDate) {

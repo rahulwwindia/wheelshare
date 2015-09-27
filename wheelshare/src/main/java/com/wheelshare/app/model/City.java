@@ -16,7 +16,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 
-@Entity 
+@Entity
 @Table(name = "CITY")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Proxy(lazy = false)
