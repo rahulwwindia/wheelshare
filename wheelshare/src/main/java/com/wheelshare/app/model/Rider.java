@@ -58,7 +58,6 @@ public class Rider{
 	@Column(name = "RIDER_ACTIVE")          
 	private boolean active;	         
 
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CREATED_DATE", nullable = false)
 	private Date createdDate;

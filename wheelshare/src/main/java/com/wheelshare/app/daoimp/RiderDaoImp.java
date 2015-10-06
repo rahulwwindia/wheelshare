@@ -2,6 +2,7 @@ package com.wheelshare.app.daoimp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -44,26 +45,17 @@ public class RiderDaoImp implements RiderDao {
 	}
 
 	@Override
-	public List<Rider> getRiderListWithLocDate(String fromDate, String toDate, String fromLocId, String toLocId,
-			String cityId) throws ParseException {
+	public List<Rider> getRiderListWithLocDate(Date date, long fromLocId, long toLocId,
+			long cityId) throws ParseException {
 		Session session = hibernateTemplate.getSessionFactory()
 				.openSession();
 		Criteria criteria = session.createCriteria(Rider.class);
-		if(fromDate!=null){
-			criteria.add(Restrictions.ge("travel_date",sdf.parse(fromDate)));
+		if(date!=null){
+			criteria.add(Restrictions.eq("travel_date",date));
 		}
-		if(toDate!=null){
-			criteria.add(Restrictions.le("travel_date",sdf.parse(toDate)));
-		}
-		if(fromLocId!=null){
-			criteria.add(Restrictions.eq("fromLocation",Long.parseLong(fromLocId)));
-		}
-		if(toLocId!=null){
-			criteria.add(Restrictions.eq("toLocation",Long.parseLong(toLocId)));
-		}    
-		if(cityId!=null){
-			criteria.add(Restrictions.eq("city",Long.parseLong(cityId)));
-		} 
+			criteria.add(Restrictions.eq("fromLocation",fromLocId));
+			criteria.add(Restrictions.eq("toLocation",toLocId));
+			criteria.add(Restrictions.eq("city",cityId));
 
 		criteria.addOrder(Order.asc("travel_date"));
 			

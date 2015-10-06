@@ -3,8 +3,6 @@ package com.wheelshare.app.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.ws.rs.FormParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -56,15 +54,10 @@ public class RiderController {
 
 	@RequestMapping(value = "/getRiders", method = RequestMethod.POST)
 	public @ResponseBody
-	List<Rider> getRidersFromLocDate(@FormParam("fromDate") String fromDate,
-            @FormParam("toDate") String toDate,
-            @FormParam("fromLocId") String fromLocId,
-            @FormParam("toLocId") String toLocId,
-            @FormParam("cityId") String cityId) {
+	List<Rider> getRidersFromLocDate(@RequestBody Rider rider ) {
 		List<Rider> riderList = null;
 		try {
-			System.out.println("fromDate :"+fromDate);
-			riderList = riderService.getRiderListWithLocDate(fromDate, toDate, fromLocId, toLocId, cityId);
+			riderList = riderService.getRiderListWithLocDate(rider.getTravel_date(), rider.getFromLocation(), rider.getToLocation(), rider.getCity());
 
 		} catch (Exception e) {
 			e.printStackTrace();

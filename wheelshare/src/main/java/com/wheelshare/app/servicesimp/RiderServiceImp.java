@@ -2,6 +2,7 @@ package com.wheelshare.app.servicesimp;
 
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,10 @@ public class RiderServiceImp implements RiderService{
 	}
 
 	@Override
-	public List<Rider> getRiderListWithLocDate(String fromDate, String toDate, String fromLocId, String toLocId, String cityId) {
+	public List<Rider> getRiderListWithLocDate(Date date, long fromLocId, long toLocId, long cityId) {
 		List<Rider> riders=null;
 		try {
-			riders=riderDao.getRiderListWithLocDate(fromDate, toDate, fromLocId, toLocId, cityId);
+			riders=riderDao.getRiderListWithLocDate(date, fromLocId, toLocId, cityId);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
