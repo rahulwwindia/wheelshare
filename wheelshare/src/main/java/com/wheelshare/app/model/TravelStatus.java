@@ -117,6 +117,13 @@ public class TravelStatus{
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "TravelStatus [travelId=" + travelId + ", riderId=" + riderId + ", seaterId=" + seaterId
+				+ ", paymentCode=" + paymentCode + ", requestStatus=" + requestStatus + ", travelDate=" + travelDate
+				+ ", requestDate=" + requestDate + ", active=" + active + "]";
 	}	         
 
 	

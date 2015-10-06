@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -89,6 +92,11 @@ public class User implements Serializable {
 	@Column(name = "PASSWORD")
 	private String password;
 
+	
+	@OneToMany
+	@JsonIgnore
+	private Set<TravelStatus> travelStatus;  
+
 	public Date getUpdatedDate() {
 		return updatedDate;
 	} 
@@ -103,13 +111,8 @@ public class User implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		try {
-			this.password = PasswordHash.createHash(password);
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		this.password=password; 
 		}
-	}
 
 	public String getRePassword() {
 		return rePassword;

@@ -2,8 +2,6 @@ package com.wheelshare.app.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.ws.rs.FormParam;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wheelshare.app.model.Status;
@@ -49,21 +48,19 @@ public class UserController {
 		User user = null;
 		try {
 			user = userService.getUserById(id);
-  
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return user;
 	}  
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST) 
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
 	public @ResponseBody
-	User userLogin(@FormParam("userName") String userName,@FormParam("password") String password) {
-		User user = null;
-		System.out.println("Test");
+	User userLogin(@RequestBody  User loginDetails) {
+		User user = null;  
 		try { 
-			user = userService.getUserByUserNamePass(userName,password);
-		} catch (Exception e) {
+			user = userService.getUserByUserNamePass(loginDetails.getUserName(),loginDetails.getPassword());
+		} catch (Exception e) {  
 			// e.printStackTrace();
 		}
 		return user;

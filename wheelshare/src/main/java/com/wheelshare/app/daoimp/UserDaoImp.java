@@ -64,7 +64,7 @@ public class UserDaoImp implements UserDao {
 		boolean flag = false;
 		List<User> user = (List<User>) hibernateTemplate.find("from User u where u.userName=?",userName);
 		System.out.println("user :"+user);
-		try {
+		try { 
 			if(user.size()!=0)
 			flag = PasswordHash.validatePassword(password, user.get(0).getPassword());
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
