@@ -41,27 +41,25 @@ public class UserAccountDaoImp implements UserAccountDao {
 
 	@Override
 	public Set<User> getAllSeaterRequest(String userId, String date) throws ParseException {
-		Session session = hibernateTemplate.getSessionFactory()
-				.openSession();
+		Session session = hibernateTemplate.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(TravelStatus.class);
 		criteria.setProjection(Projections.property("seaterId"));
-		if(date!=null){
-			criteria.add(Restrictions.eq("travelDate",sdf.parse(date)));
+		if (date != null) {
+			criteria.add(Restrictions.eq("travelDate", sdf.parse(date)));
 		}
-		if(userId!=null){
-			criteria.add(Restrictions.eq("riderId",Long.parseLong(userId)));
-		} 
-  
-		criteria.addOrder(Order.asc("requestDate"));    
-		List<TravelStatus> travelStatus=criteria.list();
-		System.out.println("travelStatus"+travelStatus.get(0));
-		Set<User> userList= new HashSet<>();	
-		for (TravelStatus traveler : travelStatus) {   
-			User user =hibernateTemplate.load(User.class, traveler.getSeaterId());
-			userList.add(user);
-			System.out.println("user :::"+user);  
+		if (userId != null) {
+			criteria.add(Restrictions.eq("riderId", Long.parseLong(userId)));
+		}
+		criteria.addOrder(Order.asc("requestDate"));
+		List travelStatus =  criteria.list();
+		Set<User> userList = new HashSet<>();
+		for (int i=0;i<travelStatus.size();i++) {
+				User user = hibernateTemplate.load(User.class, (Long) travelStatus.get(i));
+				user.setPassword(null);
+				userList.add(user);
+
 		}
 		return userList;
 	}
-  
+
 }

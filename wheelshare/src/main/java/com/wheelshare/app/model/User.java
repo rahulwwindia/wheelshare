@@ -1,18 +1,13 @@
 package com.wheelshare.app.model;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -25,8 +20,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
-
-import com.wheelshare.app.utility.PasswordHash;
 
 @Entity
 @Table(name = "USER_MASTER")
