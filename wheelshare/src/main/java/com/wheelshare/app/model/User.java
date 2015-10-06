@@ -93,9 +93,6 @@ public class User implements Serializable {
 	private String password;
 
 	
-	@OneToMany
-	@JsonIgnore
-	private Set<TravelStatus> travelStatus;  
 
 	public Date getUpdatedDate() {
 		return updatedDate;
