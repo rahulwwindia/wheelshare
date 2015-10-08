@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -15,6 +16,7 @@ import javax.persistence.TemporalType;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
+import com.wheelshare.app.utility.UpdateDateListener;
 
 @Entity
 @Table(name = "RIDER")
@@ -58,17 +60,17 @@ public class Rider{
 	@Column(name = "RIDER_ACTIVE")          
 	private boolean active;	         
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "CREATED_DATE", nullable = false)
-	private Date createdDate;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "UPDATED_DATE", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATED_DATE",updatable=false)
+	private Date createdDate;  
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "UPDATED_DATE",insertable=false)
 	private Date updatedDate;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
-	private User user;    
+	private User user;     
 
 	public long getUserId() {
 		return userId;
@@ -108,8 +110,8 @@ public class Rider{
 
 	public void setCity(long city) {
 		this.city = city;
-	}
-
+	} 
+  
 	public long getFromLocation() {
 		return fromLocation;
 	}
@@ -180,6 +182,6 @@ public class Rider{
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
+	
 
 }

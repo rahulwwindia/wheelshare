@@ -69,18 +69,6 @@ public class User implements Serializable {
 	@Column(name = "USER_ACTIVE")
 	private boolean active;
 
-	public UserAuth getUserAuth() {
-		return userAuth;
-	}
-
-	public void setUserAuth(UserAuth userAuth) {
-		this.userAuth = userAuth;
-	}
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	@JsonIgnore
-	private UserAuth userAuth;
 
 	@Column(name = "PASSWORD")
 	private String password;
@@ -204,13 +192,5 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", lastName=" + lastName + ", emailId=" + emailId + ", userName=" + userName
-				+ ", firstName=" + firstName + ", phone=" + phone + ", gender=" + gender + ", identityType="
-				+ identityType + ", identityNo=" + identityNo + ", createdDate=" + createdDate + ", updatedDate="
-				+ updatedDate + ", active=" + active + ", userAuth=" + userAuth + ", password=" + password
-				+ ", rePassword=" + rePassword + "]";
-	}
 
 }

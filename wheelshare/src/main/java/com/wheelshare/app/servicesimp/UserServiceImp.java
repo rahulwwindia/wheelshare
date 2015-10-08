@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wheelshare.app.dao.UserDao;
 import com.wheelshare.app.model.User;
-import com.wheelshare.app.model.UserAuth;
 import com.wheelshare.app.services.UserService;
 
 @Service("UserService")
@@ -44,11 +43,6 @@ public class UserServiceImp implements UserService{
 		return UserDao.getUserList();
 	}
 
-	@Override
-	public boolean addUserAuth(UserAuth userAuth) {
-		// TODO Auto-generated method stub
-		return UserDao.addUserAuth(userAuth);
-	}
   
 	@Override
 	public User getUserByUserNamePass(String userName, String password) {

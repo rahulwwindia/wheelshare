@@ -24,9 +24,21 @@ public class RiderController {
 	public @ResponseBody
 	Status addRider(@RequestBody Rider rider) {
 		try { 
+				riderService.addRider(rider); 
+			return new Status(1, "Rider added Successfully !");
+		} catch (Exception e) {
+			// e.printStackTrace();
+			return new Status(0, e.toString());
+		}
+
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
+	public @ResponseBody
+	Status editRider(@RequestBody Rider rider) {
+		try { 
 			System.out.println("Test");  
 			Date date =new Date();
-			rider.setCreatedDate(date);
 			rider.setUpdatedDate(date);
 			riderService.addRider(rider); 
 			return new Status(1, "Rider added Successfully !");
@@ -36,7 +48,7 @@ public class RiderController {
 		}
 
 	}
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Rider> getRiders() {  

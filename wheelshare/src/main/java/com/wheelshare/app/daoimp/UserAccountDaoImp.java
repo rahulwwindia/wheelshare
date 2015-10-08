@@ -50,15 +50,19 @@ public class UserAccountDaoImp implements UserAccountDao {
 		if (userId != null) {
 			criteria.add(Restrictions.eq("riderId", Long.parseLong(userId)));
 		}
+		Character active ='Y';
+		String requestStatus ="Pending";
+	//	criteria.add(Restrictions.eq("active",'Y'));
+		criteria.add(Restrictions.eq("requestStatus", requestStatus));
 		criteria.addOrder(Order.asc("requestDate"));
-		List travelStatus =  criteria.list();
-		Set<User> userList = new HashSet<>();
-		for (int i=0;i<travelStatus.size();i++) {
+		List travelStatus =  criteria.list();  
+		Set<User> userList = new HashSet<>();  
+		for (int i=0;i<travelStatus.size();i++) {  
 				User user = hibernateTemplate.load(User.class, (Long) travelStatus.get(i));
 				user.setPassword(null);
 				userList.add(user);
-
-		}
+  
+		}  
 		return userList;
 	}
 

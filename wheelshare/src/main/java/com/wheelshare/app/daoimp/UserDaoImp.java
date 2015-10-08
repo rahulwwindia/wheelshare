@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.wheelshare.app.dao.UserDao;
 import com.wheelshare.app.model.User;
-import com.wheelshare.app.model.UserAuth;
 import com.wheelshare.app.utility.PasswordHash;
 
 @Repository("UserDao")
@@ -23,11 +22,6 @@ public class UserDaoImp implements UserDao {
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
 		hibernateTemplate.persist(user);
-		UserAuth userAuth = new UserAuth();
-		System.out.println(user.getPassword());
-		userAuth.setPassword(user.getPassword());
-		userAuth.setUserId(user.getUserId());
-		user.setUserAuth(userAuth);
 		hibernateTemplate.save(user);
 		return true;
 	}
@@ -53,24 +47,17 @@ public class UserDaoImp implements UserDao {
 	}
 
 	@Override
-	public boolean addUserAuth(UserAuth User) {
-		hibernateTemplate.save(User);
-		return true;
-	}
-
-	@Override
 	public User getUserByUserNamePass(String userName, String password) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		List<User> user = (List<User>) hibernateTemplate.find("from User u where u.userName=?",userName);
-		System.out.println("user :"+user);
 		try { 
 			if(user.size()!=0)
 			flag = PasswordHash.validatePassword(password, user.get(0).getPassword());
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();  
-		}    
+		}     
 		System.out.println("flag :"+flag);    
 		if (flag)  
 			return user.get(0);

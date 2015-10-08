@@ -26,9 +26,9 @@ public class RiderDaoImp implements RiderDao {
 
 	@Override
 	public boolean addRider(Rider rider) {
-		hibernateTemplate.save(rider);
+		hibernateTemplate.saveOrUpdate(rider);
 		return true;
-	}
+	}  
 
 	@Override
 	public boolean deleteRider(long id) {
