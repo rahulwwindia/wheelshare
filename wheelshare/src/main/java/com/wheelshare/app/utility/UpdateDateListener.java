@@ -38,7 +38,6 @@ public class UpdateDateListener implements PreInsertEventListener, PreUpdateEven
 			Rider rider = (Rider) entity;
 			Date date = new Date();
 			rider.setCreatedDate(date);
-			System.out.println("***:"+propertyNames);
 			setPropertyState(state, propertyNames, "createdDate", date);
 			rider.setUpdatedDate(date);
 			setPropertyState(state, propertyNames, "updatedDate", date);
