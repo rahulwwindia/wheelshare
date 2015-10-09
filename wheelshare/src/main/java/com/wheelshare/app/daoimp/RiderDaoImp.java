@@ -48,17 +48,19 @@ public class RiderDaoImp implements RiderDao {
 	public List<Rider> getRiderListWithLocDate(Date date, long fromLocId, long toLocId,
 			long cityId) throws ParseException {
 		Session session = hibernateTemplate.getSessionFactory()
-				.openSession();
+				.openSession();  
 		Criteria criteria = session.createCriteria(Rider.class);
-		if(date!=null){
+
+		if(date!=null){   
 			criteria.add(Restrictions.eq("travel_date",date));
-		}
+		}    
 			criteria.add(Restrictions.eq("fromLocation",fromLocId));
 			criteria.add(Restrictions.eq("toLocation",toLocId));
 			criteria.add(Restrictions.eq("city",cityId));
-
+			criteria.add(Restrictions.eq("active",true));
+      
 		criteria.addOrder(Order.asc("travel_date"));
-			
+			 
 		return criteria.list();
 	}
 
