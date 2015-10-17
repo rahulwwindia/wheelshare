@@ -45,13 +45,12 @@ public class UserAccountController {
 
 	}
 	
-	@RequestMapping(value = "/getAllSeaterReq", method = RequestMethod.GET) 
+	@RequestMapping(value = "/getAllSeaterReq", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE) 
 	public @ResponseBody
-	Set<User> getAllSeatersRequest(@QueryParam("userId") String userId,
-	        @QueryParam("date") String date) {
+	Set<User> getAllSeatersRequest(@RequestBody TravelStatus travelStatus) {
 		try{
-		Set<User> travelStatus=userAccountService.getAllSeaterRequest(userId,date);
-		return travelStatus;
+		Set<User> travelerList=userAccountService.getAllSeaterRequest(travelStatus.getRiderId(),travelStatus.getTravelDate());
+		return travelerList;
 	} catch (Exception e) {
 		// e.printStackTrace();
 		return null;

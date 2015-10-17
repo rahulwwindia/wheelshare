@@ -1,7 +1,7 @@
 package com.wheelshare.app.servicesimp;
 
 import java.text.ParseException;
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class UserAccountServiceImp implements UserAccountService {
 	}
 
 	@Override
-	public Set<User> getAllSeaterRequest(String userId, String date) {
+	public Set<User> getAllSeaterRequest(long userId, Date date) {
 		// TODO Auto-generated method stub
 		try {
 			return userAccountDao.getAllSeaterRequest(userId, date);

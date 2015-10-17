@@ -2,6 +2,7 @@ package com.wheelshare.app.daoimp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +27,7 @@ public class UserAccountDaoImp implements UserAccountDao {
 	private HibernateTemplate hibernateTemplate;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat outputDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Override
 	public boolean addSeaterRequest(TravelStatus travelStatus) {
@@ -40,19 +42,19 @@ public class UserAccountDaoImp implements UserAccountDao {
 	}
 
 	@Override
-	public Set<User> getAllSeaterRequest(String userId, String date) throws ParseException {
+	public Set<User> getAllSeaterRequest(long userId, Date date) throws ParseException {
 		Session session = hibernateTemplate.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(TravelStatus.class);
 		criteria.setProjection(Projections.property("seaterId"));
 		if (date != null) {
-			criteria.add(Restrictions.eq("travelDate", sdf.parse(date)));
+			String fromDate =sdf.format(date)+" 00:00:00"; 
+			String toDate =sdf.format(date)+" 23:59:59";  
+			criteria.add(Restrictions.ge("travelDate",  outputDF.parse(fromDate))); 
+			criteria.add(Restrictions.le("travelDate",  outputDF.parse(toDate))); 
 		}
-		if (userId != null) {
-			criteria.add(Restrictions.eq("riderId", Long.parseLong(userId)));
-		}
-		Character active ='Y';
+			criteria.add(Restrictions.eq("riderId", userId));
 		String requestStatus ="Pending";
-	//	criteria.add(Restrictions.eq("active",'Y'));
+		criteria.add(Restrictions.eq("active",true));
 		criteria.add(Restrictions.eq("requestStatus", requestStatus));
 		criteria.addOrder(Order.asc("requestDate"));
 		List travelStatus =  criteria.list();  
