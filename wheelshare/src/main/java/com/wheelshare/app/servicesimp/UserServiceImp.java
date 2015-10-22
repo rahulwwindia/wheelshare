@@ -49,5 +49,12 @@ public class UserServiceImp implements UserService{
 		return UserDao.getUserByUserNamePass(userName, password);
 	}
 
+	@Override
+	public User validateUser(String emailId, String phone) {
+		// TODO Auto-generated method stub
+		return UserDao.validateUser(emailId, phone); 
+	} 
+
+	
 	
 }

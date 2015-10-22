@@ -12,5 +12,6 @@ public interface UserService {
 	public User getUserById(long id);
 	public List<User> getUserList();
 	public boolean deleteUser(long UserId);
+	public User validateUser(String emailId, String phone);
 	
 } 

@@ -33,16 +33,24 @@ public class UserController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
 	public @ResponseBody
 	Status addUser(@RequestBody User user) {
+		User userValidator;
 		try { 
+			userValidator=userService.validateUser(user.getEmailId(), user.getPhone());
+			if(userValidator==null)
+			{
+				System.out.println("User not exist");
 			Date date =new Date();
 			user.setCreatedDate(date);  
-			user.setUpdatedDate(date );
-			userService.addUser(user);  
+			user.setUpdatedDate(date );    
+			userService.addUser(user);   
 			return new Status(1, "User added Successfully !");
-		} catch (Exception e) {
+			}
+			else
+				return new Status(0, "User already exists");
+		} catch (Exception e) {  
 			// e.printStackTrace();
-			return new Status(0, e.toString());
-		}
+			return new Status(0, "Fail");
+		} 
 
 	}
   

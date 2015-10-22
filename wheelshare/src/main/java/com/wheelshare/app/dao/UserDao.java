@@ -15,4 +15,6 @@ public interface UserDao {
 	public List<User> getUserList();
 
 	public boolean deleteUser(long id);
+	
+	public User validateUser(String emailId, String phone);
 }

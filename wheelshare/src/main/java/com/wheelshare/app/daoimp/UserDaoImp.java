@@ -65,4 +65,16 @@ public class UserDaoImp implements UserDao {
 			return null;
 	}
 
+	@Override
+	public User validateUser(String emailId, String phone) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		List<User> user = (List<User>) hibernateTemplate.find("from User u where u.emailId=? or u.phone=?",emailId,phone);
+System.out.println("*********"+user);
+		if(user.size()!=0)  
+				return user.get(0);
+			else
+				return null;
+
+		}
 }
