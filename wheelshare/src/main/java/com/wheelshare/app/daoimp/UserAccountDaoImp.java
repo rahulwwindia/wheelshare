@@ -78,8 +78,8 @@ public class UserAccountDaoImp implements UserAccountDao {
 			String toDate =sdf.format(date)+" 23:59:59";  
 			criteria.add(Restrictions.ge("travelDate",  outputDF.parse(fromDate))); 
 			criteria.add(Restrictions.le("travelDate",  outputDF.parse(toDate))); 
-		}
-			criteria.add(Restrictions.eq("riderId", userId));  
+		} 
+			criteria.add(Restrictions.eq("seaterId", userId));  
 		criteria.add(Restrictions.eq("active",true));
 		criteria.add(Restrictions.in("requestStatus", new String[]{Level.ACPT,Level.CNF}));  
 		criteria.addOrder(Order.asc("requestDate"));

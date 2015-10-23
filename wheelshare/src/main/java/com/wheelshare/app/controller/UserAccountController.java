@@ -56,7 +56,7 @@ public class UserAccountController {
 	public @ResponseBody
 	Set<User> getAllRiderRequest(@RequestBody TravelStatus travelStatus) {
 		try{
-		Set<User> travelerList=userAccountService.getAllSeaterRequest(travelStatus.getRiderId(),travelStatus.getTravelDate());
+		Set<User> travelerList=userAccountService.getAllRiderRequest(travelStatus.getSeaterId(),travelStatus.getTravelDate());
 		return travelerList;
 	} catch (Exception e) {
 		// e.printStackTrace();
