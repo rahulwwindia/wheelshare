@@ -38,5 +38,17 @@ public class UserAccountServiceImp implements UserAccountService {
 		return null;
 	}
 
+	@Override
+	public Set<User> getAllRiderRequest(long userId, Date date) {
+		// TODO Auto-generated method stub
+		try {
+			return userAccountDao.getAllRiderRequest(userId, date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }

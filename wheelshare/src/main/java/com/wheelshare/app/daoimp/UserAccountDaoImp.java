@@ -68,4 +68,30 @@ public class UserAccountDaoImp implements UserAccountDao {
 		return userList;
 	}
 
+	@Override
+	public Set<User> getAllRiderRequest(long userId, Date date) throws ParseException {
+		Session session = hibernateTemplate.getSessionFactory().openSession();
+		Criteria criteria = session.createCriteria(TravelStatus.class);
+		criteria.setProjection(Projections.property("seaterId"));
+		if (date != null) {
+			String fromDate =sdf.format(date)+" 00:00:00"; 
+			String toDate =sdf.format(date)+" 23:59:59";  
+			criteria.add(Restrictions.ge("travelDate",  outputDF.parse(fromDate))); 
+			criteria.add(Restrictions.le("travelDate",  outputDF.parse(toDate))); 
+		}
+			criteria.add(Restrictions.eq("riderId", userId));  
+		criteria.add(Restrictions.eq("active",true));
+		criteria.add(Restrictions.in("requestStatus", new String[]{Level.ACPT,Level.CNF}));  
+		criteria.addOrder(Order.asc("requestDate"));
+		List travelStatus =  criteria.list();  
+		Set<User> userList = new HashSet<>();   
+		for (int i=0;i<travelStatus.size();i++) {  
+				User user = hibernateTemplate.load(User.class, (Long) travelStatus.get(i));
+				user.setPassword(null);
+				userList.add(user);
+  
+		}    
+		return userList;
+	}
+
 }

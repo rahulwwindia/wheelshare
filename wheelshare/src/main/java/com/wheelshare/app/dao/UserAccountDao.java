@@ -13,5 +13,5 @@ public interface UserAccountDao {
 
 	public boolean addSeaterRequest(TravelStatus travelStatus);
 	public Set<User> getAllSeaterRequest(long userId, Date date)throws ParseException;
-
+	public Set<User> getAllRiderRequest(long userId, Date date)throws ParseException;
 }
