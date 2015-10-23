@@ -3,6 +3,7 @@ package com.wheelshare.app.services;
 
 import java.util.List;
 
+import com.wheelshare.app.model.Status;
 import com.wheelshare.app.model.User;
 
 public interface UserService {

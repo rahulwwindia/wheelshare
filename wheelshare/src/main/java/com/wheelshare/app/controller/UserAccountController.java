@@ -25,12 +25,6 @@ public class UserAccountController {
 	@Autowired
 	UserAccountService userAccountService;
 	
-	@RequestMapping(value = "/seatersRequest", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
-	public @ResponseBody
-	Status getSeatersRequest(@RequestBody Rider rider) {
-		return null;
-		
-	}
 	
 	@RequestMapping(value = "/seaterRequest", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) 
 	public @ResponseBody

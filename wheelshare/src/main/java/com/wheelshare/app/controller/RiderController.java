@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wheelshare.app.model.Rider;
 import com.wheelshare.app.model.Status;
+import com.wheelshare.app.model.TravelStatus;
 import com.wheelshare.app.services.RiderService;
 @Controller
 @RequestMapping("/rider")
@@ -60,7 +61,33 @@ public class RiderController {
 		}
 
 		return riderList;
+	}  
+	@RequestMapping(value = "/acceptUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Status acceptUser(@RequestBody TravelStatus travelStatus ) {
+		Status status = null;
+		try {
+			status = riderService.acceptUser(travelStatus.getRiderId(), travelStatus.getSeaterId());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
 	}
 
+	@RequestMapping(value = "/rejectUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Status rejectUser(@RequestBody TravelStatus travelStatus ) {
+		Status status = null;
+		try {
+			status = riderService.rejectUser(travelStatus.getRiderId(), travelStatus.getSeaterId());
+
+		} catch (Exception e) {  
+			e.printStackTrace();
+		}
+
+		return status;
+	}
 
 }

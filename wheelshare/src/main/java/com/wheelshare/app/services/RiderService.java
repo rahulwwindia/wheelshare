@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.wheelshare.app.model.Rider;
+import com.wheelshare.app.model.Status;
 
 public interface RiderService {
 
@@ -16,5 +17,7 @@ public interface RiderService {
 	public List<Rider> getRiderListWithLocDate(Date date, long fromLocId, long toLocId, long cityId);
 
 	public boolean deleteRider(long riderId);
+	public Status acceptUser(long riderId,long seaterId);
+	public Status rejectUser(long riderId,long seaterId);
 
 }

@@ -122,4 +122,18 @@ public class UserController {
 		}
 
 	}
+	
+	@RequestMapping(value = "accept/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	Status acceptUser(@PathVariable("id") long id) {
+
+		try {
+			userService.deleteUser(id);
+			return new Status(1, "User deleted Successfully !");
+		} catch (Exception e) {
+			return new Status(0, e.toString());
+		}
+
+	}
+
 }

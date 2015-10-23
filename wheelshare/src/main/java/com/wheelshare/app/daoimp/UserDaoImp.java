@@ -9,6 +9,8 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.wheelshare.app.dao.UserDao;
+import com.wheelshare.app.model.Rider;
+import com.wheelshare.app.model.Status;
 import com.wheelshare.app.model.User;
 import com.wheelshare.app.utility.PasswordHash;
 
@@ -67,14 +69,14 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public User validateUser(String emailId, String phone) {
-		// TODO Auto-generated method stub
 		boolean flag = false;
 		List<User> user = (List<User>) hibernateTemplate.find("from User u where u.emailId=? or u.phone=?",emailId,phone);
-System.out.println("*********"+user);
 		if(user.size()!=0)  
 				return user.get(0);
 			else
 				return null;
 
 		}
+
+		
 }

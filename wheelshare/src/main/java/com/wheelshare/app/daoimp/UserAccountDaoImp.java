@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import com.wheelshare.app.dao.UserAccountDao;
 import com.wheelshare.app.model.TravelStatus;
 import com.wheelshare.app.model.User;
+import com.wheelshare.app.utility.Level;
 
 @Repository("UserAccountDao")
 public class UserAccountDaoImp implements UserAccountDao {
@@ -52,19 +53,18 @@ public class UserAccountDaoImp implements UserAccountDao {
 			criteria.add(Restrictions.ge("travelDate",  outputDF.parse(fromDate))); 
 			criteria.add(Restrictions.le("travelDate",  outputDF.parse(toDate))); 
 		}
-			criteria.add(Restrictions.eq("riderId", userId));
-		String requestStatus ="Pending";
+			criteria.add(Restrictions.eq("riderId", userId));  
 		criteria.add(Restrictions.eq("active",true));
-		criteria.add(Restrictions.eq("requestStatus", requestStatus));
+		criteria.add(Restrictions.in("requestStatus", new String[]{Level.PND,Level.ACPT,Level.CNF}));  
 		criteria.addOrder(Order.asc("requestDate"));
 		List travelStatus =  criteria.list();  
-		Set<User> userList = new HashSet<>();  
+		Set<User> userList = new HashSet<>();   
 		for (int i=0;i<travelStatus.size();i++) {  
 				User user = hibernateTemplate.load(User.class, (Long) travelStatus.get(i));
 				user.setPassword(null);
 				userList.add(user);
   
-		}  
+		}    
 		return userList;
 	}
 

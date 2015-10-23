@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wheelshare.app.dao.UserDao;
+import com.wheelshare.app.model.Status;
 import com.wheelshare.app.model.User;
 import com.wheelshare.app.services.UserService;
 
@@ -53,7 +54,9 @@ public class UserServiceImp implements UserService{
 	public User validateUser(String emailId, String phone) {
 		// TODO Auto-generated method stub
 		return UserDao.validateUser(emailId, phone); 
-	} 
+	}
+
+	
 
 	
 	

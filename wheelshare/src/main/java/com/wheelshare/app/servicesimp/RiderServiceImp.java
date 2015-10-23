@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wheelshare.app.dao.RiderDao;
 import com.wheelshare.app.model.Rider;
+import com.wheelshare.app.model.Status;
 import com.wheelshare.app.services.RiderService;
 
 @Service("RiderService")
@@ -54,6 +55,18 @@ public class RiderServiceImp implements RiderService{
 			e.printStackTrace();
 		}
 		return riders;
+	}
+
+	@Override
+	public Status acceptUser(long riderId, long seaterId) {
+		// TODO Auto-generated method stub
+		return riderDao.acceptUser(riderId, seaterId);
+	}
+
+	@Override
+	public Status rejectUser(long riderId, long seaterId) {
+		// TODO Auto-generated method stub
+		return riderDao.rejectUser(riderId, seaterId);
 	}
 
 }

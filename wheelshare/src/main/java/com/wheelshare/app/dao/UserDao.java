@@ -2,6 +2,7 @@ package com.wheelshare.app.dao;
 
 import java.util.List;
 
+import com.wheelshare.app.model.Status;
 import com.wheelshare.app.model.User;
 
 public interface UserDao {
@@ -17,4 +18,6 @@ public interface UserDao {
 	public boolean deleteUser(long id);
 	
 	public User validateUser(String emailId, String phone);
+	
+	
 }
