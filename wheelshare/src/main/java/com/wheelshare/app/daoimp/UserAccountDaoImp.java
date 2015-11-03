@@ -69,7 +69,7 @@ public class UserAccountDaoImp implements UserAccountDao {
 	}
 
 	@Override
-	public Set<User> getAllRiderRequest(long userId, Date date) throws ParseException {
+	public Set<User> confirmAllRiderReq(long userId, Date date) throws ParseException {
 		Session session = hibernateTemplate.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(TravelStatus.class);
 		criteria.setProjection(Projections.property("seaterId"));

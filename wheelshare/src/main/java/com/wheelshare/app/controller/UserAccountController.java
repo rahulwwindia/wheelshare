@@ -52,11 +52,11 @@ public class UserAccountController {
 
 	}
 	
-	@RequestMapping(value = "/getAllRiderReq", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE) 
+	@RequestMapping(value = "/confirmAllRiderReq", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE) 
 	public @ResponseBody
 	Set<User> getAllRiderRequest(@RequestBody TravelStatus travelStatus) {
 		try{
-		Set<User> travelerList=userAccountService.getAllRiderRequest(travelStatus.getSeaterId(),travelStatus.getTravelDate());
+		Set<User> travelerList=userAccountService.confirmAllRiderReq(travelStatus.getSeaterId(),travelStatus.getTravelDate());
 		return travelerList;
 	} catch (Exception e) {
 		// e.printStackTrace();

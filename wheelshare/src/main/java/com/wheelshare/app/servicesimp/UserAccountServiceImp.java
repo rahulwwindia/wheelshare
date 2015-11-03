@@ -39,10 +39,10 @@ public class UserAccountServiceImp implements UserAccountService {
 	}
 
 	@Override
-	public Set<User> getAllRiderRequest(long userId, Date date) {
+	public Set<User> confirmAllRiderReq(long userId, Date date) {
 		// TODO Auto-generated method stub
 		try {
-			return userAccountDao.getAllRiderRequest(userId, date);
+			return userAccountDao.confirmAllRiderReq(userId, date);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

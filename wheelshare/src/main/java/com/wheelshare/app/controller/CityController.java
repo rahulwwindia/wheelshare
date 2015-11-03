@@ -18,6 +18,7 @@ import com.wheelshare.app.services.CityService;
 @Controller
 @RequestMapping("/city")
 public class CityController {
+	
 
 	@Autowired
 	CityService cityService;
@@ -28,11 +29,9 @@ public class CityController {
 	public @ResponseBody
 	Status addCity(@RequestBody City city) {
 		try { 
-			
 			cityService.addCity(city); 
 			return new Status(1, "City added Successfully !");
 		} catch (Exception e) {
-			// e.printStackTrace();
 			return new Status(0, e.toString());
 		}
 
