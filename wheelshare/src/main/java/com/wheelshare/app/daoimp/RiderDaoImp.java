@@ -50,8 +50,8 @@ public class RiderDaoImp implements RiderDao {
 	@Override
 	public List<Rider> getRiderListWithLocDate(Date date, long fromLocId, long toLocId,
 			long cityId) throws ParseException {
-		Session session = hibernateTemplate.getSessionFactory()
-				.openSession();  
+		Session session = hibernateTemplate.getSessionFactory().openSession();  
+		List riderList=null;
 		Criteria criteria = session.createCriteria(Rider.class);
 
 		if(date!=null){   
@@ -61,10 +61,26 @@ public class RiderDaoImp implements RiderDao {
 			criteria.add(Restrictions.eq("toLocation",toLocId));
 			criteria.add(Restrictions.eq("city",cityId));
 			criteria.add(Restrictions.eq("active",true));
-      
-		criteria.addOrder(Order.asc("travel_date"));
+			criteria.add(Restrictions.gt("capacity",0));
+			criteria.addOrder(Order.asc("travel_date"));
+			riderList=criteria.list();
+			if(riderList.isEmpty())
+			{
+				Criteria criteria2 = session.createCriteria(Rider.class);
+
+				if(date!=null){   
+					criteria2.add(Restrictions.eq("travel_date",date));
+				}    
+				criteria2.add(Restrictions.eq("fromLocation",fromLocId));
+				criteria2.add(Restrictions.eq("city",cityId));
+				criteria2.add(Restrictions.eq("active",true));
+				criteria2.add(Restrictions.gt("capacity",0));
+				criteria2.addOrder(Order.asc("travel_date"));
+					riderList=criteria2.list();
+
+			}
 			 
-		return criteria.list();
+		return riderList;
 	}
 
 	@Override

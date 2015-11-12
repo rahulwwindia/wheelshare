@@ -2,8 +2,6 @@ package com.wheelshare.app.controller;
 
 import java.util.Set;
 
-import javax.ws.rs.QueryParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wheelshare.app.model.Rider;
 import com.wheelshare.app.model.Status;
 import com.wheelshare.app.model.TravelStatus;
 import com.wheelshare.app.model.User;
