@@ -57,6 +57,17 @@ public class UserServiceImp implements UserService{
 	}
 
 	
+	@Override
+	public Status acceptUser(long riderId, long seaterId) {
+		// TODO Auto-generated method stub
+		return UserDao.acceptUser(riderId, seaterId);
+	}
+
+	@Override
+	public Status rejectUser(long riderId, long seaterId) {
+		// TODO Auto-generated method stub
+		return UserDao.rejectUser(riderId, seaterId);
+	}
 
 	
 	

@@ -61,32 +61,4 @@ public class RiderController {
 
 		return riderList;
 	}  
-	@RequestMapping(value = "/acceptUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	Status acceptUser(@RequestBody TravelStatus travelStatus ) {
-		Status status = null;
-		try {
-			status = riderService.acceptUser(travelStatus.getRiderId(), travelStatus.getSeaterId());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return status;
-	}
-
-	@RequestMapping(value = "/rejectUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	Status rejectUser(@RequestBody TravelStatus travelStatus ) {
-		Status status = null;
-		try {
-			status = riderService.rejectUser(travelStatus.getRiderId(), travelStatus.getSeaterId());
-
-		} catch (Exception e) {  
-			e.printStackTrace();
-		}
-
-		return status;
-	}
-
 }

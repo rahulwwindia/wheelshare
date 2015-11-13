@@ -18,6 +18,9 @@ public interface UserDao {
 	public boolean deleteUser(long id);
 	
 	public User validateUser(String emailId, String phone);
+	public Status acceptUser(long riderId,long seaterId);
+	public Status rejectUser(long riderId,long seaterId);
+
 	
 	
 }

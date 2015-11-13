@@ -28,7 +28,7 @@ public class RiderDaoImp implements RiderDao {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
-	public boolean addRider(Rider rider) {
+	public boolean addRider(Rider rider) {  
 		hibernateTemplate.saveOrUpdate(rider);
 		return true;
 	}  
@@ -83,31 +83,5 @@ public class RiderDaoImp implements RiderDao {
 		return riderList;
 	}
 
-	@Override
-	public Status acceptUser(long riderId,long seaterId) {
-		List<TravelStatus> travelStatus =(List<TravelStatus>) hibernateTemplate.find("from TravelStatus where riderId="+riderId+"and seaterId="+seaterId);
-		if(travelStatus.size()!=0)
-		{
-			TravelStatus travelStatus2 = travelStatus.get(0);
-			travelStatus2.setRequestStatus(Level.ACPT);
-			hibernateTemplate.update(travelStatus2);
-			return new Status(1, "Request Accepted Successfully.");
-		}
-		return new Status(0, "Problem in accepting request.");
-	}
-
-	@Override
-	public Status rejectUser(long riderId, long seaterId) {
-		List<TravelStatus> travelStatus =(List<TravelStatus>) hibernateTemplate.find("from TravelStatus where riderId="+riderId+"and seaterId="+seaterId);
-		if(travelStatus.size()!=0)
-		{
-			TravelStatus travelStatus2 = travelStatus.get(0);
-			travelStatus2.setRequestStatus(Level.RJCT);
-			hibernateTemplate.update(travelStatus2);
-			return new Status(1, "Request Rejected Successfully.");
-		}
-		return new Status(0, "Problem in accepting request.");
-
-	}
 
 }

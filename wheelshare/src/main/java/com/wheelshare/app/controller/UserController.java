@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.wheelshare.app.model.Status;
+import com.wheelshare.app.model.TravelStatus;
 import com.wheelshare.app.model.User;
 import com.wheelshare.app.services.UserService;
   
@@ -134,6 +135,34 @@ public class UserController {
 			return new Status(0, e.toString());
 		}
 
+	}
+
+	@RequestMapping(value = "/acceptUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Status acceptUser(@RequestBody TravelStatus travelStatus ) {
+		Status status = null;
+		try {
+			status = userService.acceptUser(travelStatus.getRiderId(), travelStatus.getSeaterId());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
+	}
+
+	@RequestMapping(value = "/rejectUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Status rejectUser(@RequestBody TravelStatus travelStatus ) {
+		Status status = null;
+		try {
+			status = userService.rejectUser(travelStatus.getRiderId(), travelStatus.getSeaterId());
+
+		} catch (Exception e) {  
+			e.printStackTrace();
+		}
+
+		return status;
 	}
 
 }

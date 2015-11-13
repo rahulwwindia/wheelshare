@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 import com.wheelshare.app.dao.UserDao;
 import com.wheelshare.app.model.Rider;
 import com.wheelshare.app.model.Status;
+import com.wheelshare.app.model.TravelStatus;
 import com.wheelshare.app.model.User;
+import com.wheelshare.app.utility.Level;
 import com.wheelshare.app.utility.PasswordHash;
 
 @Repository("UserDao")
@@ -77,6 +79,37 @@ public class UserDaoImp implements UserDao {
 				return null;
 
 		}
+	
+	@Override
+	public Status acceptUser(long riderId,long seaterId) {
+		List<TravelStatus> travelStatus =(List<TravelStatus>) hibernateTemplate.find("from TravelStatus where riderId="+riderId+"and seaterId="+seaterId);
+		if(travelStatus.size()!=0)
+		{
+			TravelStatus travelStatus2 = travelStatus.get(0);
+			travelStatus2.setRequestStatus(Level.ACPT);
+			Rider rider = hibernateTemplate.load(Rider.class, travelStatus2.getRiderId());
+			int capacity=rider.getCapacity();
+			rider.setCapacity(--capacity);
+			hibernateTemplate.update(rider);
+			hibernateTemplate.update(travelStatus2);
+			return new Status(1, "Request Accepted Successfully.");
+		}
+		return new Status(0, "Problem in accepting request.");
+	}
+
+	@Override
+	public Status rejectUser(long riderId, long seaterId) {
+		List<TravelStatus> travelStatus =(List<TravelStatus>) hibernateTemplate.find("from TravelStatus where riderId="+riderId+"and seaterId="+seaterId);
+		if(travelStatus.size()!=0)
+		{
+			TravelStatus travelStatus2 = travelStatus.get(0);
+			travelStatus2.setRequestStatus(Level.RJCT);
+			hibernateTemplate.update(travelStatus2);
+			return new Status(1, "Request Rejected Successfully.");
+		}
+		return new Status(0, "Problem in accepting request.");
+
+	}
 
 		
 }
