@@ -58,6 +58,9 @@ public class Rider{
 	@Column(name = "RIDER_ACTIVE")          
 	private boolean active;	         
 
+	@Column(name = "COST")          
+	private double cost; 	         
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATED_DATE",updatable=false)
 	private Date createdDate;  
@@ -179,6 +182,14 @@ public class Rider{
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public double getCost() {
+		return cost;
+	} 
+
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 	
 
