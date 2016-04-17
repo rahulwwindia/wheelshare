@@ -39,7 +39,6 @@ public class UserController {
 			userValidator=userService.validateUser(user.getEmailId(), user.getPhone());
 			if(userValidator==null)
 			{
-				System.out.println("User not exist");
 			Date date =new Date();
 			user.setCreatedDate(date);  
 			user.setUpdatedDate(date );    

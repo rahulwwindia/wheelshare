@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.wheelshare.app.daoimp;
 
 import java.text.ParseException;
@@ -21,15 +24,26 @@ import com.wheelshare.app.model.TravelStatus;
 import com.wheelshare.app.model.User;
 import com.wheelshare.app.utility.Level;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserAccountDaoImp.
+ */
 @Repository("UserAccountDao")
 public class UserAccountDaoImp implements UserAccountDao {
 
+	/** The hibernate template. */
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 
+	/** The sdf. */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	/** The output df. */
 	SimpleDateFormat outputDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+	/* (non-Javadoc)
+	 * @see com.wheelshare.app.dao.UserAccountDao#addSeaterRequest(com.wheelshare.app.model.TravelStatus)
+	 */
 	@Override
 	public boolean addSeaterRequest(TravelStatus travelStatus) {
 		// TODO Auto-generated method stub
@@ -42,6 +56,9 @@ public class UserAccountDaoImp implements UserAccountDao {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.wheelshare.app.dao.UserAccountDao#getAllSeaterRequest(long, java.util.Date)
+	 */
 	@Override
 	public Set<User> getAllSeaterRequest(long userId, Date date) throws ParseException {
 		Session session = hibernateTemplate.getSessionFactory().openSession();
@@ -68,6 +85,9 @@ public class UserAccountDaoImp implements UserAccountDao {
 		return userList;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.wheelshare.app.dao.UserAccountDao#confirmAllRiderReq(long, java.util.Date)
+	 */
 	@Override
 	public Set<User> confirmAllRiderReq(long userId, Date date) throws ParseException {
 		Session session = hibernateTemplate.getSessionFactory().openSession();

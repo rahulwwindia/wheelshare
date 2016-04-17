@@ -15,13 +15,27 @@ import com.wheelshare.app.model.TravelStatus;
 import com.wheelshare.app.model.User;
 import com.wheelshare.app.utility.Level;
 import com.wheelshare.app.utility.PasswordHash;
-
+/**
+ * This class is common user interaction to Database, User to add,update delete user. 
+ * 
+ * @author rahul mahajan
+ * @version 1.0.0
+ * 
+ *
+ */
 @Repository("UserDao")
 public class UserDaoImp implements UserDao {
 
+	/** The hibernate template. */
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 
+	/**
+	 * Add new user in database.
+	 *
+	 * @param user the user
+	 * @return boolean
+	 */
 	@Override
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
@@ -30,18 +44,36 @@ public class UserDaoImp implements UserDao {
 		return true;
 	}
 
+	/**
+	 * Get user by Id from database.
+	 *
+	 * @param id the id
+	 * @return User user
+	 */	
 	@Override
 	public User getUserById(long id) {
 		// TODO Auto-generated method stub
 		return hibernateTemplate.load(User.class, id);
 	}
 
+
+	/**
+	 * Get all user list from database.
+	 *
+	 * @return {@link List} User user
+	 */		
 	@Override
 	public List<User> getUserList() {
 		// TODO Auto-generated method stub
 		return (List<User>) hibernateTemplate.find("from User");
 	}
 
+	/**
+	 * Soft delete the user using userId.
+	 *
+	 * @param id the id
+	 * @return boolean
+	 */			
 	@Override
 	public boolean deleteUser(long id) {
 		User user = hibernateTemplate.load(User.class, id);
@@ -50,6 +82,13 @@ public class UserDaoImp implements UserDao {
 		return true;
 	}
 
+	/**
+	 * Get user by using username and password.
+	 *
+	 * @param userName the user name
+	 * @param password the password
+	 * @return User user
+	 */		
 	@Override
 	public User getUserByUserNamePass(String userName, String password) {
 		// TODO Auto-generated method stub
@@ -69,6 +108,9 @@ public class UserDaoImp implements UserDao {
 			return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.wheelshare.app.dao.UserDao#validateUser(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public User validateUser(String emailId, String phone) {
 		boolean flag = false;
@@ -80,8 +122,19 @@ public class UserDaoImp implements UserDao {
 
 		}
 	
+	
+	/**
+	 * Accept seater request for ride.
+	 *
+	 * @param riderId the rider id
+	 * @param seaterId the seater id
+	 * @return Status status.
+	 */		
+
 	@Override
 	public Status acceptUser(long riderId,long seaterId) {
+		System.out.println("riderId:"+riderId);
+		System.out.println("seaterId:"+seaterId);
 		List<TravelStatus> travelStatus =(List<TravelStatus>) hibernateTemplate.find("from TravelStatus where riderId="+riderId+"and seaterId="+seaterId);
 		if(travelStatus.size()!=0)
 		{
@@ -97,6 +150,14 @@ public class UserDaoImp implements UserDao {
 		return new Status(0, "Problem in accepting request.");
 	}
 
+
+	/**
+	 * Reject seater request for ride.
+	 *
+	 * @param riderId the rider id
+	 * @param seaterId the seater id
+	 * @return Status status.
+	 */			
 	@Override
 	public Status rejectUser(long riderId, long seaterId) {
 		List<TravelStatus> travelStatus =(List<TravelStatus>) hibernateTemplate.find("from TravelStatus where riderId="+riderId+"and seaterId="+seaterId);
